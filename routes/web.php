@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\TicksController;
+use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Route\IndexRoutes;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Redirects
 Route::get('/', function () {
-    return view('welcome');
+    if(auth()->user()){
+        return redirect('routes');
+    } else {
+        return view('welcome');
+    }
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Routes
+Route::get('/routes', IndexRoutes::class)->middleware(['auth:sanctum', 'verified'])->name('routes');
+Route::post('/routes/{route}/ticks', [TicksController::class, 'store'])->middleware(['auth:sanctum', 'verified'])->name('ticks');
+
+//Dashboard
+Route::get('/dashboard', Dashboard::class)->middleware(['auth:sanctum', 'verified'])->name('dashboard');

@@ -18,7 +18,7 @@
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased text-gray-900">
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-dropdown')
 
@@ -31,7 +31,13 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="overflow-hidden shadow-xl sm:rounded-lg">
+                            {{ $slot }}
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
 
